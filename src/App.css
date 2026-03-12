@@ -199,7 +199,7 @@ h1, h2, h3 {
     mix-blend-mode: multiply; /* Mathematical shadow: pure white text becomes 100% transparent */
 
     transform-origin: center center;
-    transform: scale(50); /* Start massively zoomed in */
+    transform: scale(200); /* Start massively zoomed in */
     opacity: 0; /* START TRANSPARENT */
     will-change: transform, opacity;
 }
