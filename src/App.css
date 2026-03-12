@@ -184,36 +184,34 @@ h1, h2, h3 {
 }
 
 /* 
-  The SVG Mask Container.
+  The Pure CSS Multiply Mask Container.
 */
-.hero-svg-mask {
+.hero-multiply-mask {
     position: absolute;
     top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: 2;
-    pointer-events: none; /* Let clicks pass to image if needed */
+    pointer-events: none;
     
-    /* Native CSS scaling to ensure it zooms absolutely from the dead-center */
+    background-color: #000000; /* Pure black annihilates light inside multiply */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    mix-blend-mode: multiply; /* Mathematical shadow: pure white text becomes 100% transparent */
+
     transform-origin: center center;
     transform: scale(50); /* Start massively zoomed in */
     opacity: 0; /* START TRANSPARENT */
-    will-change: transform, opacity; /* Optimize composition */
+    will-change: transform, opacity;
 }
 
-.hero-svg-mask svg {
-    width: 100%;
-    height: 100%;
-}
-
-.mask-bg {
-    fill: var(--bg-dark); /* The black box covering the image */
-}
-
-.mask-text {
+.hero-multiply-text {
     font-size: 15vw; /* Perfectly scales with screen width */
     font-weight: 900;
     font-family: 'Outfit', sans-serif;
     text-transform: uppercase;
-    text-anchor: middle;
+    color: #ffffff; /* Pure white makes the perfect transparent whole */
+    margin: 0;
+    line-height: 1;
 }
 
 .hero-content {

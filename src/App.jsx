@@ -71,14 +71,13 @@ function App() {
         }
       });
 
-      // Step 1: The solid black mask fades IN instantly over the first scroll tick.
-      // This immediately overlays the black box but leaves the massive text hole transparent.
-      heroTl.to(".hero-svg-mask", { opacity: 1, duration: 0.5, ease: "none" }, 0);
+      // Step 1: The completely black mask fades IN instantly over the first scroll tick.
+      heroTl.to(".hero-multiply-mask", { opacity: 1, duration: 0.5, ease: "none" }, 0);
 
-      // Step 2: The massively scaled SVG natively shrinks down to scale(1).
+      // Step 2: The massively scaled CSS mask natively shrinks down to scale(1).
       // Because transform-origin is CSS centered, it will perfectly close in from
-      // all 4 edges of the screen simultaneously. No panning from the side!
-      heroTl.to(".hero-svg-mask", { scale: 1, duration: 2, ease: "power2.out" }, 0);
+      // all 4 edges of the screen simultaneously.
+      heroTl.to(".hero-multiply-mask", { scale: 1, duration: 2, ease: "power2.out" }, 0);
 
       // --- OTHER SCROLL ANIMATIONS ---
 
@@ -196,21 +195,10 @@ function App() {
           {/* The Solid Background Image */}
           <div className="hero-image-bg"></div>
 
-          {/* The SVG Mask (No ViewBox math, purely CSS scaled from dead-center) */}
-          <div className="hero-svg-mask">
-            <svg className="mask-svg" width="100%" height="100%">
-              <defs>
-                <mask id="text-mask" x="0" y="0" width="100%" height="100%">
-                  {/* White background: The visible area */}
-                  <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                  {/* Black text: The exact center hole punched into the white mask */}
-                  <text x="50%" y="54%" className="mask-text" fill="black">MINECRAFT</text>
-                </mask>
-              </defs>
-              
-              {/* The physical black box applied to the screen */}
-              <rect x="0" y="0" width="100%" height="100%" className="mask-bg" mask="url(#text-mask)" />
-            </svg>
+          {/* The Pure CSS Multiply Mask */}
+          {/* mix-blend-mode: multiply turns the white text 100% transparent, and the black background 100% solid! */}
+          <div className="hero-multiply-mask">
+            <h1 className="hero-multiply-text">MINECRAFT</h1>
           </div>
 
           <div className="scroll-indicator" style={{bottom: "10vh", zIndex: 10}}>
