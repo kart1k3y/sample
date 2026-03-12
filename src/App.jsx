@@ -14,10 +14,18 @@ function App() {
 
   // --- LOADING ANIMATION ---
   useEffect(() => {
+    // Force the browser to start at the top of the page on a fresh reload
+    window.scrollTo(0, 0);
+    // Lock native scrolling so the user cannot scroll the page behind the loading screen!
+    // This guarantees the GSAP ScrollTriggers calculate precisely at y:0 when loading finishes.
+    document.body.style.overflow = "hidden";
+
     // Simulate a Minecraft terrain generation / loading process
     const tl = gsap.timeline({
       onComplete: () => {
         setIsLoading(false);
+        // Release the scroll lock so Lenis can take over
+        document.body.style.overflow = ""; 
       }
     });
 
@@ -178,7 +186,7 @@ function App() {
       )}
 
       {/* Navbar */}
-      <nav className="navbar" style={{ display: isLoading ? 'none' : 'flex' }}>
+      <nav className="navbar">
         <div className="logo">MINECRAFT</div>
         <div className="nav-links">
           <a href="#items">Items</a>
@@ -189,7 +197,7 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="hero" style={{ display: isLoading ? 'none' : 'block' }}>
+      <section className="hero">
         <div className="hero-sticky-container">
           
           {/* The Solid Background Image */}
